@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphOperations", "GraphOperations\GraphOperations.csproj", "{BC832B09-D345-4D47-8887-65728A548475}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transactions", "Transactions\Transactions.csproj", "{BC832B09-D345-4D47-8887-65728A548475}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Primitives", "Primitives\Primitives.csproj", "{D7D97875-C779-4C79-8DD5-206C9D185E50}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GraphOperations", "GraphOperations", "{7943B4B0-13B6-420B-9558-A09DA0358E1A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{AA4A342C-F06B-41B4-B732-6D6F62E190EA}"
+	ProjectSection(SolutionItems) = preProject
+		Common\Helpers.cs = Common\Helpers.cs
+		Common\Names.cs = Common\Names.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +25,16 @@ Global
 		{BC832B09-D345-4D47-8887-65728A548475}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC832B09-D345-4D47-8887-65728A548475}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC832B09-D345-4D47-8887-65728A548475}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7D97875-C779-4C79-8DD5-206C9D185E50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7D97875-C779-4C79-8DD5-206C9D185E50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7D97875-C779-4C79-8DD5-206C9D185E50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7D97875-C779-4C79-8DD5-206C9D185E50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BC832B09-D345-4D47-8887-65728A548475} = {7943B4B0-13B6-420B-9558-A09DA0358E1A}
+		{D7D97875-C779-4C79-8DD5-206C9D185E50} = {7943B4B0-13B6-420B-9558-A09DA0358E1A}
 	EndGlobalSection
 EndGlobal

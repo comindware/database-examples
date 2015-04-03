@@ -7,8 +7,8 @@
     <ProjectGuid>{BC832B09-D345-4D47-8887-65728A548475}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Comindware.Database.Examples.GraphOperations</RootNamespace>
-    <AssemblyName>GraphOperations</AssemblyName>
+    <RootNamespace>Comindware.Database.Examples.Transactions</RootNamespace>
+    <AssemblyName>Transactions</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <DisplayOntologyReferences>false</DisplayOntologyReferences>
@@ -82,6 +82,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Common\Helpers.cs">
+      <Link>Helpers.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Names.cs">
+      <Link>Names.cs</Link>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
