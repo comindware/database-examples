@@ -19,11 +19,7 @@ namespace Comindware.Database.Examples.Transactions
         {
             // Initializing required database engine modules:
             // - Basic operations
-            // - N3-Interpreter
-            // - Brain
             Initializer.Initialize();
-            Logics.N3.Initializer.Initialize();
-            Logics.Think.Initializer.Initialize();
 
             // Transactions example
             using (var model = ModelManager.CreateInMemoryModel(Names.Example))
