@@ -15,8 +15,10 @@ namespace Comindware.Database.Examples
     internal static class Names
     {
         // Namespaces
-        public static readonly QName Example;
-        public static readonly QName SecondDatabase;
+        public static readonly QDomain Example;
+        public static readonly QName DatabaseName;
+        public static readonly QName Brain;
+        public static readonly QName SecondDatabaseName;
 
         // Subjects
         public static readonly QName Frans;
@@ -27,6 +29,7 @@ namespace Comindware.Database.Examples
         public static readonly QName Caroline;
         public static readonly QName Dirk;
         public static readonly QName Greta;
+        public static readonly QName Paul;
         public static readonly QName Dp;
 
         // Predicates
@@ -54,8 +57,10 @@ namespace Comindware.Database.Examples
 
         static Names()
         {
-            Example = Logics.Names.CreateName("example");
-            SecondDatabase = Logics.Names.CreateName("secondDatabase");
+            Example = Logics.Names.Internal.Uri.CreateDomain("http://www.example.com/logics/example#");
+            Brain = Example.CreateName("brain");
+            DatabaseName = Example.CreateName("database");
+            SecondDatabaseName = Example.CreateName("secondDatabase");
 
             Frans = Example.CreateName("Frans");
             Maria = Example.CreateName("Maria");
@@ -65,6 +70,7 @@ namespace Comindware.Database.Examples
             Caroline = Example.CreateName("Caroline");
             Dirk = Example.CreateName("Dirk");
             Greta = Example.CreateName("Greta");
+            Paul = Example.CreateName("Paul");
             Dp = Example.CreateName("dp");
 
             Sex = Example.CreateName("sex");

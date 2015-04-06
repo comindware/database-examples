@@ -1,0 +1,23 @@
+﻿# ***********************************************************************
+# <author>Stepan Burguchev</author>
+# <copyright company="Comindware">
+#   Copyright (c) Comindware 2010-2015. All rights reserved.
+# </copyright>
+# <summary>
+#   testData Ontology
+# </summary>
+# ***********************************************************************
+
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
+@prefix : <http://www.example.com/logics/example#>.
+
+:dummy :status null.
+:task :status :new.
+
+:new a :taskStatus.
+:inWork a :taskStatus.
+:done a :taskStatus.
+
+{ ?s :status ?x. ?s :status ?y. ?x log:notEqualTo ?y. } => { :test1 :failed true }.

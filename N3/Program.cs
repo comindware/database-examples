@@ -11,12 +11,10 @@
 using System;
 using System.IO;
 using System.Linq;
-using Comindware.Common;
 using Comindware.Logics;
-using Comindware.Logics.NTriples;
 using Comindware.Logics.Raw;
 
-namespace Comindware.Database.Examples.NTriples
+namespace Comindware.Database.Examples.N3
 {
     internal class Program
     {
@@ -29,19 +27,18 @@ namespace Comindware.Database.Examples.NTriples
             Logics.N3.Initializer.Initialize();
 
             // N-Triples example
-            using (var model = ModelManager.CreateInMemoryModel(Names.Example))
+            using (var model = ModelManager.CreateInMemoryModel(Names.DatabaseName))
             {
-                var statusPredicate = Logics.Names.CreateName("status");
-                var taskSubject = Logics.Names.CreateName("task");
-                var taskStatusClass = Logics.Names.CreateName("taskStatus");
+                var statusPredicate = Names.Example.CreateName("status");
+                var taskSubject = Names.Example.CreateName("task");
+                var taskStatusClass = Names.Example.CreateName("taskStatus");
 
                 // Reading...
                 using (var reader = new StreamReader("Ontology/testData.n3"))
                 {
-                    var statements = N3.Parse(reader);
+                    var statements = Logics.NTriples.N3.Parse(reader);
                     model.AddStatements(statements);
                 }
-
                 var taskStatus = model.GetFact(taskSubject, statusPredicate);
                 Console.WriteLine("task status is: {0}", Helpers.Beautify(taskStatus));
 
@@ -49,7 +46,7 @@ namespace Comindware.Database.Examples.NTriples
                 var statusMeta = model.EnumerableMatch(null, (Determinant<object, QName>)null, Logics.Names.Common.A, taskStatusClass).ToArray();
                 using (var writer = new StreamWriter("Ontology/taskStatusClasses.n3"))
                 {
-                    N3.WriteN3(statusMeta, writer);
+                    Logics.NTriples.N3.WriteN3(statusMeta, writer);
                 }
             }
         }

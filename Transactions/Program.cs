@@ -22,7 +22,7 @@ namespace Comindware.Database.Examples.Transactions
             Initializer.Initialize();
 
             // Transactions example
-            using (var model = ModelManager.CreateInMemoryModel(Names.Example))
+            using (var model = ModelManager.CreateInMemoryModel(Names.DatabaseName))
             {
                 // Adding a fact directly, without any transaction
                 model.AddFact(Names.Maria, Names.Sex, Names.Female);

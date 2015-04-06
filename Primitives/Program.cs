@@ -23,7 +23,7 @@ namespace Comindware.Database.Examples.Primitives
             Initializer.Initialize();
 
             // Working with Database primitives
-            using (var model = ModelManager.CreateInMemoryModel(Names.Example))
+            using (var model = ModelManager.CreateInMemoryModel(Names.DatabaseName))
             {
                 var subject = Names.Maria;
                 var stringPredicate = model.CreateName("string");

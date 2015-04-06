@@ -28,10 +28,10 @@ namespace Comindware.Database.Examples.Unions
             Logics.Think.Initializer.Initialize();
 
             // Unions
-            using (var model1 = ModelManager.CreateInMemoryModel(Names.Example).AutoDispose())
+            using (var model1 = ModelManager.CreateInMemoryModel(Names.DatabaseName).AutoDispose())
             {
                 model1.Target.AddFact(Names.Maria, Names.Parent, Names.Dirk);
-                using (var model2 = ModelManager.CreateInMemoryModel(Names.SecondDatabase).AutoDispose())
+                using (var model2 = ModelManager.CreateInMemoryModel(Names.SecondDatabaseName).AutoDispose())
                 {
                     model2.Target.AddFact(Names.Maria, Names.Parent, Names.Greta);
                     using (var union = model1.Union(model2))

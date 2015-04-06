@@ -17,13 +17,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{AA4A34
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadWrite", "ReadWrite\ReadWrite.csproj", "{00F81B8E-94B1-47C0-9EF0-A97F72FCE3B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NTriples", "NTriples\NTriples.csproj", "{B41534FD-E39A-44D3-8CDE-1A5A4692C253}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N3", "N3\N3.csproj", "{B41534FD-E39A-44D3-8CDE-1A5A4692C253}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unions", "Unions\Unions.csproj", "{8480EDE1-D282-4331-877C-F843CF41A91C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Storage", "Storage", "{FBF10EED-F1AD-460A-BE09-2C0F21EFCB8A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersistentModel", "PersistentModel\PersistentModel.csproj", "{F659C8A2-AD3B-4A90-8CF0-5DA453AA84DF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Inference", "Inference", "{98DB0B9E-BD70-49DF-86BD-47F4A57C09D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rules", "Rules\Rules.csproj", "{51234D21-F7A5-4CE8-97E2-C2B0147BB82B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{90DE36C4-B8FE-45AE-940B-BDB5FD3DA98D}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +66,10 @@ Global
 		{F659C8A2-AD3B-4A90-8CF0-5DA453AA84DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F659C8A2-AD3B-4A90-8CF0-5DA453AA84DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F659C8A2-AD3B-4A90-8CF0-5DA453AA84DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51234D21-F7A5-4CE8-97E2-C2B0147BB82B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51234D21-F7A5-4CE8-97E2-C2B0147BB82B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51234D21-F7A5-4CE8-97E2-C2B0147BB82B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51234D21-F7A5-4CE8-97E2-C2B0147BB82B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,5 +81,6 @@ Global
 		{B41534FD-E39A-44D3-8CDE-1A5A4692C253} = {7943B4B0-13B6-420B-9558-A09DA0358E1A}
 		{8480EDE1-D282-4331-877C-F843CF41A91C} = {7943B4B0-13B6-420B-9558-A09DA0358E1A}
 		{F659C8A2-AD3B-4A90-8CF0-5DA453AA84DF} = {FBF10EED-F1AD-460A-BE09-2C0F21EFCB8A}
+		{51234D21-F7A5-4CE8-97E2-C2B0147BB82B} = {98DB0B9E-BD70-49DF-86BD-47F4A57C09D4}
 	EndGlobalSection
 EndGlobal

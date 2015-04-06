@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F659C8A2-AD3B-4A90-8CF0-5DA453AA84DF}</ProjectGuid>
+    <ProjectGuid>{B41534FD-E39A-44D3-8CDE-1A5A4692C253}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Comindware.Database.Examples.PersistentModel</RootNamespace>
-    <AssemblyName>PersistentModel</AssemblyName>
+    <RootNamespace>Comindware.Database.Examples.N3</RootNamespace>
+    <AssemblyName>N3</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <DisplayOntologyReferences>false</DisplayOntologyReferences>
@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.3.1.7705, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Comindware.Externals.Antlr.3.3.1.7705\lib\net40\Antlr3.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Comindware.Common, Version=1.1.112.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Comindware.Common.Signed.1.1.112.0\references\Comindware.Common.dll</HintPath>
@@ -75,10 +79,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Comindware.Logics.Signed.2.1.106.0\references\Comindware.Logics.Synapse.dll</HintPath>
     </Reference>
-    <Reference Include="Comindware.Storage.Core.Net, Version=2.1.34.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Comindware.Logics.Storage.Signed.2.1.34.0\references\Comindware.Storage.Core.Net.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -99,6 +99,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Ontology\testData.n3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -109,16 +112,6 @@
     </N3Compile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="Deploy_Binaries_Of_Comindware_Logics_Storage_Signed" BeforeTargets="BeforeBuild">
-    <ItemGroup>
-      <Comindware_Logics_Storage_Signed_Binaries_64 Include="$(SolutionDir)packages\Comindware.Logics.Storage.Signed.2.1.34.0\native-binaries\x64\*.*" />
-      <Comindware_Logics_Storage_Signed_Binaries_86 Include="$(SolutionDir)packages\Comindware.Logics.Storage.Signed.2.1.34.0\native-binaries\x86\*.*" />
-    </ItemGroup>
-    <MakeDir Directories="$(TargetDir)x86" />
-    <MakeDir Directories="$(TargetDir)x64" />
-    <Copy SourceFiles="@(Comindware_Logics_Storage_Signed_Binaries_86)" DestinationFolder="$(TargetDir)x86" />
-    <Copy SourceFiles="@(Comindware_Logics_Storage_Signed_Binaries_64)" DestinationFolder="$(TargetDir)x64" />
-  </Target>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
