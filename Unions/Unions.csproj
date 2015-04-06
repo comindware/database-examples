@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8480EDE1-D282-4331-877C-F843CF41A91C}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Comindware.Database.Examples.Unions</RootNamespace>
+    <AssemblyName>Unions</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <DisplayOntologyReferences>false</DisplayOntologyReferences>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Comindware.Common, Version=1.1.112.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Comindware.Common.Signed.1.1.112.0\references\Comindware.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Comindware.Common.Caching, Version=1.1.112.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Comindware.Common.Signed.1.1.112.0\references\Comindware.Common.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="Comindware.Logics, Version=2.1.106.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Comindware.Logics.Signed.2.1.106.0\references\Comindware.Logics.dll</HintPath>
+    </Reference>
+    <Reference Include="Comindware.Logics.Brain, Version=2.1.106.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Comindware.Logics.Signed.2.1.106.0\references\Comindware.Logics.Brain.dll</HintPath>
+    </Reference>
+    <Reference Include="Comindware.Logics.CompilerExt, Version=2.1.106.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Comindware.Logics.Signed.2.1.106.0\references\Comindware.Logics.CompilerExt.dll</HintPath>
+    </Reference>
+    <Reference Include="Comindware.Logics.Formulae, Version=2.1.106.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Comindware.Logics.Signed.2.1.106.0\references\Comindware.Logics.Formulae.dll</HintPath>
+    </Reference>
+    <Reference Include="Comindware.Logics.N3, Version=2.1.106.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Comindware.Logics.Signed.2.1.106.0\references\Comindware.Logics.N3.dll</HintPath>
+    </Reference>
+    <Reference Include="Comindware.Logics.Ontology, Version=2.1.106.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Comindware.Logics.Signed.2.1.106.0\references\Comindware.Logics.Ontology.dll</HintPath>
+    </Reference>
+    <Reference Include="Comindware.Logics.Repository, Version=2.1.106.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Comindware.Logics.Signed.2.1.106.0\references\Comindware.Logics.Repository.dll</HintPath>
+    </Reference>
+    <Reference Include="Comindware.Logics.Synapse, Version=2.1.106.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Comindware.Logics.Signed.2.1.106.0\references\Comindware.Logics.Synapse.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Common\Helpers.cs">
+      <Link>Helpers.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Names.cs">
+      <Link>Names.cs</Link>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <N3Compile Include="..\packages\Comindware.Logics.Signed.2.1.106.0\ontologies\**\*.n3">
+      <Visible>$(DisplayOntologyReferences)</Visible>
+      <Link>Ontologies\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </N3Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

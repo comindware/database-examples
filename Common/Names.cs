@@ -16,6 +16,7 @@ namespace Comindware.Database.Examples
     {
         // Namespaces
         public static readonly QName Example;
+        public static readonly QName SecondDatabase;
 
         // Subjects
         public static readonly QName Frans;
@@ -54,6 +55,7 @@ namespace Comindware.Database.Examples
         static Names()
         {
             Example = Logics.Names.CreateName("example");
+            SecondDatabase = Logics.Names.CreateName("secondDatabase");
 
             Frans = Example.CreateName("Frans");
             Maria = Example.CreateName("Maria");

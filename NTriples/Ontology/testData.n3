@@ -15,5 +15,9 @@
 
 :dummy :status null.
 :task :status :new.
+
+:new a :taskStatus.
+:inWork a :taskStatus.
+:done a :taskStatus.
                 
 { ?s :status ?x. ?s :status ?y. ?x log:notEqualTo ?y. } => { :test1 :failed true }.
