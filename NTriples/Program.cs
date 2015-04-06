@@ -24,7 +24,9 @@ namespace Comindware.Database.Examples.NTriples
         {
             // Initializing required database engine modules:
             // - Basic operations
+            // - N3-Interpreter
             Initializer.Initialize();
+            Logics.N3.Initializer.Initialize();
 
             // N-Triples example
             using (var model = ModelManager.CreateInMemoryModel(Names.Example))
