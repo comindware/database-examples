@@ -602,16 +602,19 @@ namespace Comindware.Database.Examples.Builtins
             @prefix : <http://www.example.com/logics/example#>.
 
             {
-
+                ?x a :Person.
+                ?x :firstName ?fn.
+                ?x :lastName ?ln.
+                (""{0} {1}"" ?fn ?ln) string:format ?z
             }
             =>
             {
-
+                ?x :fullName ?z.
             }
             ".ParseString());
 
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
+            var fullName = model.GetFact<string>(Names.Paul, Names.Example.CreateName("fullName"));
+            Console.WriteLine("Full name: {0}", fullName);
         }
 
         private static void SwapStringGreaterThan(Model model)
@@ -621,16 +624,24 @@ namespace Comindware.Database.Examples.Builtins
             @prefix : <http://www.example.com/logics/example#>.
 
             {
-
+                ?x a :Person.
+                ?y a :Person.
+                ?x :firstName ?xfn.
+                ?y :firstName ?yfn.
+                ?xfn string:greaterThan ?yfn.
             }
             =>
             {
-
+                (?x ?y) :sorted true.
             }
             ".ParseString());
 
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
+            var sorted = model.GetFact<bool>(new[]
+                {
+                    Names.Rita,
+                    Names.Paul
+                }.CreateLiteral(), Names.Example.CreateName("sorted"));
+            Console.WriteLine("Sorted: {0}", sorted);
         }
 
         private static void SwapStringLessThan(Model model)
@@ -640,17 +651,25 @@ namespace Comindware.Database.Examples.Builtins
             @prefix : <http://www.example.com/logics/example#>.
 
             {
-
+                ?x a :Person.
+                ?y a :Person.
+                ?x :firstName ?xfn.
+                ?y :firstName ?yfn.
+                ?xfn string:lessThan ?yfn.
             }
             =>
             {
-
+                (?x ?y) :sortedDescending true.
             }
             ".ParseString());
 
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
-        }
+            var sortedDescending = model.GetFact<bool>(new[]
+                {
+                    Names.Paul,
+                    Names.Rita
+                }.CreateLiteral(), Names.Example.CreateName("sortedDescending"));
+            Console.WriteLine("Sorted Descending: {0}", sortedDescending);
+       }
 
         private static void SwapStringMatches(Model model)
         {
