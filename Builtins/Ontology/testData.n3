@@ -1,0 +1,40 @@
+﻿# ***********************************************************************
+# <author>Stepan Burguchev</author>
+# <copyright company="Comindware">
+#   Copyright (c) Comindware 2010-2015. All rights reserved.
+# </copyright>
+# <summary>
+#   testData Ontology
+# </summary>
+# ***********************************************************************
+
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#>.
+@prefix string: <http://www.w3.org/2000/10/swap/string#>.
+@prefix time: <http://www.w3.org/2000/10/swap/time#>.
+@prefix : <http://www.example.com/logics/example#>.
+
+:Paul a :Person;
+    :firstName "Paul";
+    :lastName "Smith";
+    :age 42;
+    :mother :Rita.
+
+:Rita a :Person;
+    :firstName "Rita";
+    :lastName "Smith";
+    :age 62;
+    :mother :Caroline.
+
+:Caroline a :Person;
+    :firstName "Caroline";
+    :lastName "Smith";
+    :age 82.
+
+:Frans a :Person;
+    :firstName "Frans";
+    :lastName "Smith";
+    :age 80.

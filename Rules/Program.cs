@@ -31,7 +31,7 @@ namespace Comindware.Database.Examples.Rules
 
             using (var model = ModelManager.CreateInMemoryModel(Names.DatabaseName).AutoDispose().Think(Names.Brain))
             {
-                model.AddStatements(N3.ParseString(@"
+                model.AddStatements(@"
                     @prefix : <http://www.example.com/logics/example#>.
 
                     :Paul :mother :Rita.
@@ -39,14 +39,14 @@ namespace Comindware.Database.Examples.Rules
 
                     {
                         ?x :mother ?y.
-                        ?y :mother ?z
+                        ?y :mother ?z.
                     }
                     =>
                     {
                         ?x :grandmother ?z
                     }.
 
-                "));
+                ".ParseString());
 
                 var grandmother = model.GetFact(Names.Paul, Names.Grandmother);
                 Console.WriteLine("Paul's grandmother is: {0}", Helpers.Beautify(grandmother));

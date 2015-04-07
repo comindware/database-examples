@@ -50,10 +50,14 @@ namespace Comindware.Database.Examples
         public static readonly QName Grandchild;
         public static readonly QName Granddaughter;
         public static readonly QName Grandson;
+        public static readonly QName FirstName;
+        public static readonly QName LastName;
+        public static readonly QName Age;
 
         // Objects
         public static readonly QName Female;
         public static readonly QName Male;
+        public static readonly QName Person;
 
         static Names()
         {
@@ -90,9 +94,13 @@ namespace Comindware.Database.Examples
             Grandchild = Example.CreateName("grandchild");
             Granddaughter = Example.CreateName("granddaughter");
             Grandson = Example.CreateName("grandson");
+            FirstName = Example.CreateName("firstName");
+            LastName = Example.CreateName("lastName");
+            Age = Example.CreateName("age");
 
             Female = Example.CreateName("female");
             Male = Example.CreateName("male");
+            Person = Example.CreateName("Person");
         }
     }
 }
