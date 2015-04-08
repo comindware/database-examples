@@ -673,21 +673,65 @@ namespace Comindware.Database.Examples.Builtins
 
         private static void SwapStringMatches(Model model)
         {
+            // Use .NET regex syntax for patterns.
+
+            // Simple example: true if Person's first name matches the pattern
+            // We use @in statements to indicate that ?x and ?pattern variables are always presented while querying the fact.
             model.AddStatements(@"
             @prefix string: <http://www.w3.org/2000/10/swap/string#>.
             @prefix : <http://www.example.com/logics/example#>.
 
+            @in ?x, ?pattern.
             {
-
+                ?x a :Person.
+                ?x :firstName ?fn.
+                ?fn string:matches ?pattern.
             }
             =>
             {
+                (?x ?pattern) :matchesPattern true.
+            }
+            ".ParseString());
+            var paulMatchesPattern = model.GetFact<bool>(new[]
+                {
+                    Names.Paul,
+                    @".aul".CreateLiteral()
+                }.CreateLiteral(), Names.Example.CreateName("matchesPattern"));
+            Console.WriteLine("Paul's first name matches '.aul' pattern: {0}", paulMatchesPattern);
 
+            // Complex example: return the persons whose first name matches the pattern.
+            model.AddStatements(@"
+            @prefix string: <http://www.w3.org/2000/10/swap/string#>.
+            @prefix list: <http://www.w3.org/2000/10/swap/list#>.
+            @prefix : <http://www.example.com/logics/example#>.
+
+            @in ?list, ?pattern.
+            {
+                ?list list:member ?x.
+                ?x a :Person.
+                ?x :firstName ?fn.
+                ?fn string:matches ?pattern.
+            }
+            =>
+            {
+                (?list ?pattern) :matchedPersons ?x.
             }
             ".ParseString());
 
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
+            var matchedPersons = model.GetFacts(
+                new QName[]
+                    {
+                        new[]
+                            {
+                                Names.Paul,
+                                Names.Rita,
+                                Names.Frans,
+                                Names.Caroline
+                            }.CreateLiteral(),
+                        @"[iu]+".CreateLiteral()
+                    }.CreateLiteral(),
+                Names.Example.CreateName("matchedPersons"));
+            Console.WriteLine("Matched persons: {0}", string.Join(", ", matchedPersons.Select(Helpers.Beautify)));
         }
 
         private static void SwapStringNotGreater(Model model)
@@ -697,16 +741,24 @@ namespace Comindware.Database.Examples.Builtins
             @prefix : <http://www.example.com/logics/example#>.
 
             {
-
+                ?x a :Person.
+                ?y a :Person.
+                ?x :firstName ?xfn.
+                ?y :firstName ?yfn.
+                ?xfn string:notGreaterThan ?yfn.
             }
             =>
             {
-
+                (?x ?y) :notGreaterThan true.
             }
             ".ParseString());
 
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
+            var sorted = model.GetFact<bool>(new[]
+                {
+                    Names.Paul,
+                    Names.Rita
+                }.CreateLiteral(), Names.Example.CreateName("notGreaterThan"));
+            Console.WriteLine("notGreaterThan: {0}", sorted);
         }
 
         private static void SwapStringNotLessThan(Model model)
@@ -716,54 +768,75 @@ namespace Comindware.Database.Examples.Builtins
             @prefix : <http://www.example.com/logics/example#>.
 
             {
-
+                ?x a :Person.
+                ?y a :Person.
+                ?x :firstName ?xfn.
+                ?y :firstName ?yfn.
+                ?xfn string:notLessThan ?yfn.
             }
             =>
             {
-
+                (?x ?y) :notLessThan true.
             }
             ".ParseString());
 
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
+            var notLessThan = model.GetFact<bool>(new[]
+                {
+                    Names.Rita,
+                    Names.Paul
+                }.CreateLiteral(), Names.Example.CreateName("notLessThan"));
+            Console.WriteLine("notLessThan: {0}", notLessThan);
         }
 
         private static void SwapStringNotMatches(Model model)
         {
+            // Use .NET regex syntax for patterns.
+
+            // Simple example: true if Person's first name matches the pattern
+            // We use @in statements to indicate that ?x and ?pattern variables are always presented while querying the fact.
             model.AddStatements(@"
             @prefix string: <http://www.w3.org/2000/10/swap/string#>.
             @prefix : <http://www.example.com/logics/example#>.
 
+            @in ?x, ?pattern.
             {
-
+                ?x a :Person.
+                ?x :firstName ?fn.
+                ?fn string:notMatches ?pattern.
             }
             =>
             {
-
+                (?x ?pattern) :notMatchesPattern true.
             }
             ".ParseString());
-
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
+            var paulDoesntMatchPattern = model.GetFact<bool>(new[]
+                {
+                    Names.Paul,
+                    @"Jack".CreateLiteral()
+                }.CreateLiteral(), Names.Example.CreateName("notMatchesPattern"));
+            Console.WriteLine("Paul's first name doesn't match 'Jack' pattern: {0}", paulDoesntMatchPattern);
         }
 
         private static void SwapTimeInSeconds(Model model)
         {
             model.AddStatements(@"
-            @prefix string: <http://www.w3.org/2000/10/swap/string#>.
+            @prefix time: <http://www.w3.org/2000/10/swap/time#>.
             @prefix : <http://www.example.com/logics/example#>.
 
             {
-
+                ?x time:inSeconds ?y.
             }
             =>
             {
-
+                ?x :asSeconds ?y.
             }
             ".ParseString());
 
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
+            var unixTime = model.GetFact(DateTime.SpecifyKind(new DateTime(2010, 1, 1), DateTimeKind.Utc).CreateLiteral(), Names.Example.CreateName("asSeconds"));
+            var seconds = model.GetFact(TimeSpan.FromSeconds(123456).CreateLiteral(), Names.Example.CreateName("asSeconds"));
+
+            Console.WriteLine("Unix time: {0}", unixTime);
+            Console.WriteLine("Seconds: {0}", seconds);
         }
     }
 }

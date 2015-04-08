@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transactions", "Transaction
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Primitives", "Primitives\Primitives.csproj", "{D7D97875-C779-4C79-8DD5-206C9D185E50}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GraphOperations", "GraphOperations", "{7943B4B0-13B6-420B-9558-A09DA0358E1A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. GraphOperations", "1. GraphOperations", "{7943B4B0-13B6-420B-9558-A09DA0358E1A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{AA4A342C-F06B-41B4-B732-6D6F62E190EA}"
 	ProjectSection(SolutionItems) = preProject
@@ -21,11 +21,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N3", "N3\N3.csproj", "{B415
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unions", "Unions\Unions.csproj", "{8480EDE1-D282-4331-877C-F843CF41A91C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Storage", "Storage", "{FBF10EED-F1AD-460A-BE09-2C0F21EFCB8A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Storage", "2. Storage", "{FBF10EED-F1AD-460A-BE09-2C0F21EFCB8A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersistentModel", "PersistentModel\PersistentModel.csproj", "{F659C8A2-AD3B-4A90-8CF0-5DA453AA84DF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Inference", "Inference", "{98DB0B9E-BD70-49DF-86BD-47F4A57C09D4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Inference", "3. Inference", "{98DB0B9E-BD70-49DF-86BD-47F4A57C09D4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rules", "Rules\Rules.csproj", "{51234D21-F7A5-4CE8-97E2-C2B0147BB82B}"
 EndProject
