@@ -108,6 +108,7 @@
  */
 
 using System;
+using System.CodeDom;
 using System.IO;
 using System.Linq;
 using Comindware.Common;
@@ -270,20 +271,26 @@ namespace Comindware.Database.Examples.Builtins
         private static void SwapLogContent(Model model)
         {
             model.AddStatements(@"
-            @prefix string: <http://www.w3.org/2000/10/swap/string#>.
+            @prefix log: <http://www.w3.org/2000/10/swap/log#>.
             @prefix : <http://www.example.com/logics/example#>.
 
             {
-
+                <Ontology/testData.n3> log:content ?content.
             }
             =>
             {
-
+                :content :is ?content.
             }
             ".ParseString());
 
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
+            var stream = (Stream)model.GetFact<object>(Names.Example.CreateName("content"), Names.Example.CreateName("is"));
+            string content;
+            using (var reader = new StreamReader(stream))
+            {
+                content = reader.ReadToEnd();
+            }
+
+            Console.WriteLine("Loaded content: {0} symbols", content.Length);
         }
 
         private static void SwapLogSemantics(Model model)
@@ -327,248 +334,271 @@ namespace Comindware.Database.Examples.Builtins
         private static void SwapMathDifference(Model model)
         {
             model.AddStatements(@"
-            @prefix string: <http://www.w3.org/2000/10/swap/string#>.
+            @prefix math: <http://www.w3.org/2000/10/swap/math#>.
+            @prefix list: <http://www.w3.org/2000/10/swap/list#>.
             @prefix : <http://www.example.com/logics/example#>.
 
             {
-
+                (?x ?y) math:difference ?z.
             }
             =>
             {
-
+                (?x ?y) :difference ?z.
             }
             ".ParseString());
 
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
+            var difference = model.GetFact<int>(new QName[]
+                {
+                    11.CreateLiteral(),
+                    1.CreateLiteral()
+                }.CreateLiteral(), Names.Example.CreateName("difference"));
+            Console.WriteLine("Difference is: {0}", difference);
         }
 
         private static void SwapMathEqualTo(Model model)
         {
             model.AddStatements(@"
-            @prefix string: <http://www.w3.org/2000/10/swap/string#>.
+            @prefix math: <http://www.w3.org/2000/10/swap/math#>.
+            @prefix list: <http://www.w3.org/2000/10/swap/list#>.
             @prefix : <http://www.example.com/logics/example#>.
 
             {
-
+                ?x math:equalTo 2.
             }
             =>
             {
-
+                ?x :equalTo true.
             }
             ".ParseString());
 
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
+            var equalTo = model.GetFact<bool>(2.CreateLiteral(), Names.Example.CreateName("equalTo"));
+            Console.WriteLine("1 equal to 2: {0}", equalTo);
         }
 
         private static void SwapMathGreaterThan(Model model)
         {
             model.AddStatements(@"
-            @prefix string: <http://www.w3.org/2000/10/swap/string#>.
+            @prefix math: <http://www.w3.org/2000/10/swap/math#>.
+            @prefix list: <http://www.w3.org/2000/10/swap/list#>.
             @prefix : <http://www.example.com/logics/example#>.
 
             {
-
+                ?x math:greaterThan 6.
             }
             =>
             {
-
+                ?x :greaterThan true.
             }
             ".ParseString());
 
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
+            var greaterThan = model.GetFact<bool>(7.CreateLiteral(), Names.Example.CreateName("greaterThan"));
+            Console.WriteLine("7 greater than 6: {0}", greaterThan);
         }
 
         private static void SwapMathIntegerQuotient(Model model)
         {
             model.AddStatements(@"
-            @prefix string: <http://www.w3.org/2000/10/swap/string#>.
+            @prefix math: <http://www.w3.org/2000/10/swap/math#>.
+            @prefix list: <http://www.w3.org/2000/10/swap/list#>.
             @prefix : <http://www.example.com/logics/example#>.
 
             {
-
+                (?x 2) math:integerQuotient ?z.
             }
             =>
             {
-
+                ?x :integerQuotient ?z.
             }
             ".ParseString());
 
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
+            var integerQuotient = model.GetFact<double>(5.CreateLiteral(), Names.Example.CreateName("integerQuotient"));
+            Console.WriteLine("Quotient is: {0}", integerQuotient);
         }
 
         private static void SwapMathLessThan(Model model)
         {
             model.AddStatements(@"
-            @prefix string: <http://www.w3.org/2000/10/swap/string#>.
+            @prefix math: <http://www.w3.org/2000/10/swap/math#>.
+            @prefix list: <http://www.w3.org/2000/10/swap/list#>.
             @prefix : <http://www.example.com/logics/example#>.
 
             {
-
+                ?x math:lessThan 6.
             }
             =>
             {
-
+                ?x :lessThan true.
             }
             ".ParseString());
 
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
+            var lessThan = model.GetFact<bool>(5.CreateLiteral(), Names.Example.CreateName("lessThan"));
+            Console.WriteLine("5 less than 6: {0}", lessThan);
         }
 
         private static void SwapMathNegation(Model model)
         {
+            // We must use @in to indicate input variables for the correct rule compilation.
             model.AddStatements(@"
-            @prefix string: <http://www.w3.org/2000/10/swap/string#>.
+            @prefix math: <http://www.w3.org/2000/10/swap/math#>.
             @prefix : <http://www.example.com/logics/example#>.
 
+            @in ?x.
             {
-
+                ?x math:negation ?y.
             }
             =>
             {
-
-            }
+                ?x :negated ?y.
+            }.
             ".ParseString());
 
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
+            var negatedValue = model.GetFact<int>(1.CreateLiteral(), Names.Example.CreateName("negated"));
+            Console.WriteLine("negation of 1 is: {0}", negatedValue);
         }
 
         private static void SwapMathNotEqualTo(Model model)
         {
             model.AddStatements(@"
-            @prefix string: <http://www.w3.org/2000/10/swap/string#>.
+            @prefix math: <http://www.w3.org/2000/10/swap/math#>.
+            @prefix list: <http://www.w3.org/2000/10/swap/list#>.
             @prefix : <http://www.example.com/logics/example#>.
 
             {
-
+                ?x math:notEqualTo 2.
             }
             =>
             {
-
+                ?x :notEqualTo true.
             }
             ".ParseString());
 
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
+            var notEqualTo = model.GetFact<bool>(1.CreateLiteral(), Names.Example.CreateName("notEqualTo"));
+            Console.WriteLine("1 not equal to 2: {0}", notEqualTo);
         }
 
         private static void SwapMathNotGreaterThan(Model model)
         {
             model.AddStatements(@"
-            @prefix string: <http://www.w3.org/2000/10/swap/string#>.
+            @prefix math: <http://www.w3.org/2000/10/swap/math#>.
+            @prefix list: <http://www.w3.org/2000/10/swap/list#>.
             @prefix : <http://www.example.com/logics/example#>.
 
             {
-
+                ?x math:notGreaterThan 2.
             }
             =>
             {
-
+                ?x :notGreaterThan true.
             }
             ".ParseString());
 
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
+            var notGreaterThan = model.GetFact<bool>(1.CreateLiteral(), Names.Example.CreateName("notGreaterThan"));
+            Console.WriteLine("1 not greater than 2: {0}", notGreaterThan);
         }
 
         private static void SwapMathNotLessThan(Model model)
         {
             model.AddStatements(@"
-            @prefix string: <http://www.w3.org/2000/10/swap/string#>.
+            @prefix math: <http://www.w3.org/2000/10/swap/math#>.
+            @prefix list: <http://www.w3.org/2000/10/swap/list#>.
             @prefix : <http://www.example.com/logics/example#>.
 
             {
-
+                ?x math:notLessThan 2.
             }
             =>
             {
-
+                ?x :notLessThan true.
             }
             ".ParseString());
 
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
+            var notLessThan = model.GetFact<bool>(5.CreateLiteral(), Names.Example.CreateName("notLessThan"));
+            Console.WriteLine("5 not less than 2: {0}", notLessThan);
         }
 
         private static void SwapMathProduct(Model model)
         {
             model.AddStatements(@"
-            @prefix string: <http://www.w3.org/2000/10/swap/string#>.
+            @prefix math: <http://www.w3.org/2000/10/swap/math#>.
+            @prefix list: <http://www.w3.org/2000/10/swap/list#>.
             @prefix : <http://www.example.com/logics/example#>.
 
             {
-
+                (?x 2) math:product ?z.
             }
             =>
             {
-
+                ?x :product ?z.
             }
             ".ParseString());
 
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
+            var product = model.GetFact<double>(5.CreateLiteral(), Names.Example.CreateName("product"));
+            Console.WriteLine("Product is: {0}", product);
         }
 
         private static void SwapMathQuotient(Model model)
         {
             model.AddStatements(@"
-            @prefix string: <http://www.w3.org/2000/10/swap/string#>.
+            @prefix math: <http://www.w3.org/2000/10/swap/math#>.
+            @prefix list: <http://www.w3.org/2000/10/swap/list#>.
             @prefix : <http://www.example.com/logics/example#>.
 
             {
-
+                (?x 2) math:quotient ?z.
             }
             =>
             {
-
+                ?x :quotient ?z.
             }
             ".ParseString());
 
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
+            var quotient = model.GetFact<double>(5.CreateLiteral(), Names.Example.CreateName("quotient"));
+            Console.WriteLine("Quotient is: {0}", quotient);
         }
 
         private static void SwapMathRemainder(Model model)
         {
             model.AddStatements(@"
-            @prefix string: <http://www.w3.org/2000/10/swap/string#>.
+            @prefix math: <http://www.w3.org/2000/10/swap/math#>.
+            @prefix list: <http://www.w3.org/2000/10/swap/list#>.
             @prefix : <http://www.example.com/logics/example#>.
 
             {
-
+                (?x 2) math:remainder ?z.
             }
             =>
             {
-
+                ?x :remainder ?z.
             }
             ".ParseString());
 
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
+            var remainder = model.GetFact<int>(5.CreateLiteral(), Names.Example.CreateName("remainder"));
+            Console.WriteLine("Remainder is: {0}", remainder);
         }
 
         private static void SwapMathSum(Model model)
         {
             model.AddStatements(@"
-            @prefix string: <http://www.w3.org/2000/10/swap/string#>.
+            @prefix math: <http://www.w3.org/2000/10/swap/math#>.
+            @prefix list: <http://www.w3.org/2000/10/swap/list#>.
             @prefix : <http://www.example.com/logics/example#>.
 
             {
-
+                (?list (10 20)) list:append ?flatList.
+                ?flatList math:sum ?y.
             }
             =>
             {
-
+                ?list :sum ?y.
             }
             ".ParseString());
 
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
+            var sum = model.GetFact<int>(new QName[]
+                {
+                    1.CreateLiteral(),
+                    2.CreateLiteral()
+                }.CreateLiteral(), Names.Example.CreateName("sum"));
+            Console.WriteLine("Sum is: {0}", sum);
         }
 
         private static void SwapStringConcatenation(Model model)
