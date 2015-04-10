@@ -78,6 +78,12 @@
     http://www.w3.org/2000/10/swap/list#member
     http://www.w3.org/2000/10/swap/log#conjunction
     http://www.w3.org/2000/10/swap/log#content
+    http://www.w3.org/2000/10/swap/log#includes
+    http://www.w3.org/2000/10/swap/log#notIncludes
+    http://www.w3.org/2000/10/swap/log#implies
+    http://www.w3.org/2000/10/swap/log#supports
+    http://www.w3.org/2000/10/swap/log#equals
+    http://www.w3.org/2000/10/swap/log#notEquals
     http://www.w3.org/2000/10/swap/log#semantics
     http://www.w3.org/2000/10/swap/log#uri
     http://www.w3.org/2000/10/swap/math#difference
@@ -108,7 +114,6 @@
  */
 
 using System;
-using System.CodeDom;
 using System.IO;
 using System.Linq;
 using Comindware.Common;
@@ -144,6 +149,11 @@ namespace Comindware.Database.Examples.Builtins
                 SwapListMember(model);
                 SwapLogConjunction(model);
                 SwapLogContent(model);
+                SwapLogIncludes(model);
+                SwapLogNotIncludes(model);
+                SwapLogEqualTo(model);
+                SwapLogNotEqualTo(model);
+                SwapLogSupports(model);
                 SwapLogSemantics(model);
                 SwapLogUri(model);
                 SwapMathDifference(model);
@@ -252,20 +262,23 @@ namespace Comindware.Database.Examples.Builtins
         private static void SwapLogConjunction(Model model)
         {
             model.AddStatements(@"
-            @prefix string: <http://www.w3.org/2000/10/swap/string#>.
+            @prefix log: <http://www.w3.org/2000/10/swap/log#>.
             @prefix : <http://www.example.com/logics/example#>.
 
             {
-
+                <Ontology/testData.n3> log:semantics ?testData.
+                <Ontology/meta.n3> log:semantics ?meta.
+                (?testData ?meta) log:conjunction ?formulae.
+                ?formulae log:includes { ?x a :Person. }.
             }
             =>
             {
-
+                ?x :conjunction true.
             }
             ".ParseString());
 
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
+            var result = model.GetFact<bool>(Names.Paul, Names.Example.CreateName("conjunction"));
+            Console.WriteLine("Conjunction result contains the statement: {0}", result);
         }
 
         private static void SwapLogContent(Model model)
@@ -293,42 +306,152 @@ namespace Comindware.Database.Examples.Builtins
             Console.WriteLine("Loaded content: {0} symbols", content.Length);
         }
 
-        private static void SwapLogSemantics(Model model)
+        private static void SwapLogIncludes(Model model)
         {
             model.AddStatements(@"
-            @prefix string: <http://www.w3.org/2000/10/swap/string#>.
+            @prefix log: <http://www.w3.org/2000/10/swap/log#>.
             @prefix : <http://www.example.com/logics/example#>.
 
             {
-
+                { :Paul :mother :Caroline. :Paul :father :Frans. } log:includes { :Paul :mother :Caroline. }.
             }
             =>
             {
-
-            }
+                :result :includes true.
+            }.
             ".ParseString());
 
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
+            var result = model.GetFact<bool>(Names.Example.CreateName("result"), Names.Example.CreateName("includes"));
+            Console.WriteLine("Document semantics includes the rule: {0}", result);
+        }
+
+        private static void SwapLogNotIncludes(Model model)
+        {
+            model.AddStatements(@"
+            @prefix log: <http://www.w3.org/2000/10/swap/log#>.
+            @prefix : <http://www.example.com/logics/example#>.
+
+            {
+                { :Paul :mother :Rita. :Paul :father :Frans. } -> ?family.
+                ?family log:notIncludes { :Boston :weather :sunny }.
+            } => {:result :notIncludes true}.
+            ".ParseString());
+
+            var result = model.GetFact<bool>(Names.Example.CreateName("result"), Names.Example.CreateName("notIncludes"));
+            Console.WriteLine("Document semantics does not include the rule: {0}", result);
+        }
+
+        private static void SwapLogSupports(Model model)
+        {
+            model.AddStatements(@"
+            @prefix log: <http://www.w3.org/2000/10/swap/log#>.
+            @prefix : <http://www.example.com/logics/example#>.
+
+            {
+                {
+                  :Paul :mother :Caroline.
+                  :Paul :father :Frans.
+                  { :Paul :mother :Caroline } => { :Paul :parent :Caroline }
+                } log:supports { :Paul :mother :Caroline. }.
+            }
+            =>
+            {
+                :result :supports true.
+            }.
+            ".ParseString());
+
+            // TODO: Fix the log:supports implementation
+            var result = model.GetFact<bool>(Names.Example.CreateName("result"), Names.Example.CreateName("supports"));
+            Console.WriteLine("Document semantics supports the rule: {0}", result);
+        }
+
+        private static void SwapLogEqualTo(Model model)
+        {
+            model.AddStatements(@"
+            @prefix log: <http://www.w3.org/2000/10/swap/log#>.
+            @prefix : <http://www.example.com/logics/example#>.
+
+            :Paul :mother :Rita.
+            :Paul :father :Frans.
+
+            {
+                ?x :mother ?y.
+                ?x :father ?z.
+                ?y log:equalTo :Rita.
+                ?z == :Frans.
+            } => { ?x :equalTo true }.
+            ".ParseString());
+
+            var result = model.GetFact<bool>(Names.Paul, Names.Example.CreateName("equalTo"));
+            Console.WriteLine("The subject's parents are Rita and Frans: {0}", result);
+        }
+
+        private static void SwapLogNotEqualTo(Model model)
+        {
+            model.AddStatements(@"
+            @prefix log: <http://www.w3.org/2000/10/swap/log#>.
+            @prefix : <http://www.example.com/logics/example#>.
+
+            :Paul :mother :Rita.
+            :Paul :father :Frans.
+            :Caroline :mother :Greta.
+            :Caroline :father :Dirk.
+
+            {
+                ?x :mother ?y.
+                ?x :father ?z.
+                ?y log:notEqualTo :Rita.
+                ?z != :Frans.
+            } => { ?x :notEqualTo true }.
+            ".ParseString());
+
+            var result = model.GetFact<bool>(Names.Caroline, Names.Example.CreateName("notEqualTo"));
+            Console.WriteLine("The subject's parents are not Rita and Frans: {0}", result);
+        }
+
+        private static void SwapLogSemantics(Model model)
+        {
+            model.AddStatements(@"
+            @prefix log: <http://www.w3.org/2000/10/swap/log#>.
+            @prefix : <http://www.example.com/logics/example#>.
+
+            :Paul :mother :Caroline.
+
+            {
+                <> log:semantics ?M.
+                ?M log:includes { :Paul :mother :Caroline. }.
+            }
+            =>
+            {
+                :result :semantics true.
+            }.
+            ".ParseString());
+
+            var result = model.GetFact<bool>(Names.Example.CreateName("result"), Names.Example.CreateName("semantics"));
+            Console.WriteLine("Document semantics includes the rule: {0}", result);
         }
 
         private static void SwapLogUri(Model model)
         {
             model.AddStatements(@"
+            @prefix log: <http://www.w3.org/2000/10/swap/log#>.
             @prefix string: <http://www.w3.org/2000/10/swap/string#>.
             @prefix : <http://www.example.com/logics/example#>.
 
             {
-
+                ?x a :Person.
+                ?x log:uri ?y.
+                ?y string:matches ""example""
             }
             =>
             {
-
-            }
+                ?x :uriMatchesExample ?y.
+            }.
             ".ParseString());
 
-            //var paul = model.GetFact(/*TODO*/);
-            //Console.WriteLine("Found person: {0}", Helpers.Beautify(paul))
+            // TODO: fix the log:uri implementation
+            var result = model.GetFact<bool>(Names.Paul, Names.Example.CreateName("uriMatchesExample"));
+            Console.WriteLine("Paul is in examples namespace: {0}", result);
         }
 
         private static void SwapMathDifference(Model model)

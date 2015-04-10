@@ -98,6 +98,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Ontology\meta.n3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Ontology\testData.n3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
