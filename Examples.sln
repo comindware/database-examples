@@ -38,6 +38,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{90DE36
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Builtins", "Builtins\Builtins.csproj", "{F6424480-0A65-4C0A-BD4A-9B437AD808EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomBuiltins", "CustomBuiltins\CustomBuiltins.csproj", "{FE146AFA-534F-4A96-A5E2-BCA6A7D9DF9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,10 @@ Global
 		{F6424480-0A65-4C0A-BD4A-9B437AD808EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6424480-0A65-4C0A-BD4A-9B437AD808EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6424480-0A65-4C0A-BD4A-9B437AD808EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE146AFA-534F-4A96-A5E2-BCA6A7D9DF9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE146AFA-534F-4A96-A5E2-BCA6A7D9DF9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE146AFA-534F-4A96-A5E2-BCA6A7D9DF9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE146AFA-534F-4A96-A5E2-BCA6A7D9DF9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,5 +95,6 @@ Global
 		{F659C8A2-AD3B-4A90-8CF0-5DA453AA84DF} = {FBF10EED-F1AD-460A-BE09-2C0F21EFCB8A}
 		{51234D21-F7A5-4CE8-97E2-C2B0147BB82B} = {98DB0B9E-BD70-49DF-86BD-47F4A57C09D4}
 		{F6424480-0A65-4C0A-BD4A-9B437AD808EE} = {98DB0B9E-BD70-49DF-86BD-47F4A57C09D4}
+		{FE146AFA-534F-4A96-A5E2-BCA6A7D9DF9C} = {98DB0B9E-BD70-49DF-86BD-47F4A57C09D4}
 	EndGlobalSection
 EndGlobal
