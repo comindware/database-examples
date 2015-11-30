@@ -347,12 +347,13 @@ namespace Comindware.Database.Examples.Builtins
             @prefix log: <http://www.w3.org/2000/10/swap/log#>.
             @prefix : <http://www.example.com/logics/example#>.
 
+            { :Paul :mother :Caroline } => { :Paul :parent :Caroline }.
+
             {
                 {
                   :Paul :mother :Caroline.
                   :Paul :father :Frans.
-                  { :Paul :mother :Caroline } => { :Paul :parent :Caroline }
-                } log:supports { :Paul :mother :Caroline. }.
+                } log:supports { :Paul :parent :Caroline. }.
             }
             =>
             {
@@ -439,18 +440,16 @@ namespace Comindware.Database.Examples.Builtins
             @prefix : <http://www.example.com/logics/example#>.
 
             {
-                ?x a :Person.
-                ?x log:uri ?y.
-                ?y string:matches ""example""
+                <> log:uri ?y.
             }
             =>
             {
-                ?x :uriMatchesExample ?y.
+                :test :uriMatchesExample ?y.
             }.
             ".ParseString());
 
             // TODO: fix the log:uri implementation
-            var result = model.GetFact<bool>(Names.Paul, Names.Example.CreateName("uriMatchesExample"));
+            var result = model.GetFact(Names.Example.CreateName("test"), Names.Example.CreateName("uriMatchesExample"));
             Console.WriteLine("Paul is in examples namespace: {0}", result);
         }
 
