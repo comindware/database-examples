@@ -33,18 +33,11 @@ namespace Comindware.Database.Examples.CustomBuiltins
             AverageBuiltin();
             IsGreaterThanBuiltin();
 
-
             //Register Builtin from loaded assembly,
             RegisterBuiltinViaAssemblySheme();
             
             //Register Builtin From File
             RegisterBuiltinViaFileSheme();
-
-            
-            // TODO: There are 3 ways to register custom builtin: in .n3 - file: and assembly:, in code: register typeof(T)
-            // TODO: There are several ways to specify parameters and the result (as QName or strongly typed literal, with result as the object or the fact itself)
-
-
         }
 
         private static void RegisterBuiltinInCode()
@@ -71,6 +64,7 @@ namespace Comindware.Database.Examples.CustomBuiltins
                         :fileBuiltinResult :is ?fileBuiltinResult.
                     }.
                 ".Replace("{{{filepath}}}", filepath).ParseString());
+
                 var result = model.GetFact<string>(Names.Example.CreateName("fileBuiltinResult"), Names.Example.CreateName("is"));
                 Console.WriteLine("Registered via File Builtin Result: {0}", result);
             }
@@ -98,6 +92,7 @@ namespace Comindware.Database.Examples.CustomBuiltins
                         :assemblyBuiltinResult :is ?assemblyBuiltinResult.
                     }.
                 ".ParseString());
+
                 var result = model.GetFact<string>(Names.Example.CreateName("assemblyBuiltinResult"), Names.Example.CreateName("is"));
                 Console.WriteLine("Registered via Assembly Builtin Result: {0}", result);
             }

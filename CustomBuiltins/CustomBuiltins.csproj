@@ -35,49 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr3.Runtime">
-      <HintPath>..\packages\Comindware.Externals.Antlr.3.3.1.7705\bin\Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Comindware.Common, Version=1.1.112.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Comindware.Common.Signed.1.1.112.0\references\Comindware.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Comindware.Common.Caching, Version=1.1.112.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Comindware.Common.Signed.1.1.112.0\references\Comindware.Common.Caching.dll</HintPath>
-    </Reference>
-    <Reference Include="Comindware.Logics, Version=2.1.106.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Comindware.Logics.Signed.2.1.106.0\references\Comindware.Logics.dll</HintPath>
-    </Reference>
-    <Reference Include="Comindware.Logics.Brain, Version=2.1.106.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Comindware.Logics.Signed.2.1.106.0\references\Comindware.Logics.Brain.dll</HintPath>
-    </Reference>
-    <Reference Include="Comindware.Logics.CompilerExt, Version=2.1.106.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Comindware.Logics.Signed.2.1.106.0\references\Comindware.Logics.CompilerExt.dll</HintPath>
-    </Reference>
-    <Reference Include="Comindware.Logics.Formulae, Version=2.1.106.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Comindware.Logics.Signed.2.1.106.0\references\Comindware.Logics.Formulae.dll</HintPath>
-    </Reference>
-    <Reference Include="Comindware.Logics.N3, Version=2.1.106.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Comindware.Logics.Signed.2.1.106.0\references\Comindware.Logics.N3.dll</HintPath>
-    </Reference>
-    <Reference Include="Comindware.Logics.Ontology, Version=2.1.106.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Comindware.Logics.Signed.2.1.106.0\references\Comindware.Logics.Ontology.dll</HintPath>
-    </Reference>
-    <Reference Include="Comindware.Logics.Repository, Version=2.1.106.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Comindware.Logics.Signed.2.1.106.0\references\Comindware.Logics.Repository.dll</HintPath>
-    </Reference>
-    <Reference Include="Comindware.Logics.Synapse, Version=2.1.106.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Comindware.Logics.Signed.2.1.106.0\references\Comindware.Logics.Synapse.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -99,15 +56,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <N3Compile Include="..\packages\Comindware.Logics.Signed.2.1.106.0\ontologies\**\*.n3">
-      <Visible>$(DisplayOntologyReferences)</Visible>
-      <Link>Ontologies\%(RecursiveDir)%(Filename)%(Extension)</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </N3Compile>
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CustomBuiltinsAssembly\CustomBuiltinsAssembly.csproj">
       <Project>{c3447765-fd14-45fc-b7b3-a27c9638dbdc}</Project>

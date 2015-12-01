@@ -32,33 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr3.Runtime">
-      <HintPath>..\packages\Comindware.Externals.Antlr.3.3.1.7705\bin\Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Comindware.Common, Version=1.1.112.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Comindware.Common.Signed.1.1.112.0\references\Comindware.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Comindware.Common.Caching, Version=1.1.112.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Comindware.Common.Signed.1.1.112.0\references\Comindware.Common.Caching.dll</HintPath>
-    </Reference>
-    <Reference Include="Comindware.Logics, Version=2.1.106.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Comindware.Logics.Signed.2.1.106.0\references\Comindware.Logics.dll</HintPath>
-    </Reference>
-    <Reference Include="Comindware.Logics.Brain, Version=2.1.106.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Comindware.Logics.Signed.2.1.106.0\references\Comindware.Logics.Brain.dll</HintPath>
-    </Reference>
-    <Reference Include="Comindware.Logics.Formulae, Version=2.1.106.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Comindware.Logics.Signed.2.1.106.0\references\Comindware.Logics.Formulae.dll</HintPath>
-    </Reference>
-    <Reference Include="Comindware.Logics.N3, Version=2.1.106.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Comindware.Logics.Signed.2.1.106.0\references\Comindware.Logics.N3.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
